@@ -6,7 +6,8 @@ import {
   StyleSheet, 
   Image, 
   FlatList, 
-  StatusBar 
+  StatusBar,
+  Linking
 } from 'react-native';
 
 // American Airlines Color Palette
@@ -64,6 +65,21 @@ const AirportNavigationRecommendation = ({ navigation, route }: any) => {
     setRecommendations(mapQueries);
   }, []);
 
+  const openGoogleMaps = (place: string) => {
+    if (!place) {
+      alert('Please enter a place name');
+      return;
+    }
+
+    const searchQuery = `${place} in George Bush Intercontinental Airport`;
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
+
+    // Try opening the Google Maps URL
+    Linking.openURL(url).catch((err) => {
+      console.error("Couldn't open the URL", err);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={AA_COLORS.BLUE} />
@@ -91,7 +107,8 @@ const AirportNavigationRecommendation = ({ navigation, route }: any) => {
           data={recommendations}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.recommendationItem}>
+            <TouchableOpacity style={styles.recommendationItem}
+              onPress={() => openGoogleMaps(item)}>
               <Text style={styles.recommendationText}>{item}</Text>
             </TouchableOpacity>
           )}
