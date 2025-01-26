@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Button, Alert } from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+import users from '../../assets/users.json';
 
 const Login = ({ navigation }: any) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleLogin = () => {
+    // Find the user with matching email and password
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      // Navigate to Flightinfo screen with the user data
+      navigation.navigate('Flightinfo', { user });
+    } else {
+      // Show error if credentials are invalid
+      Alert.alert('Login Failed', 'Invalid email or password.');
+    }
+  }
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -15,9 +28,9 @@ const Login = ({ navigation }: any) => {
         <View style={styles.formContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Username"
-            value={username}
-            onChangeText={setUsername}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
           />
           <TextInput
             style={styles.input}
@@ -26,7 +39,7 @@ const Login = ({ navigation }: any) => {
             value={password}
             onChangeText={setPassword}
           />
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity>
