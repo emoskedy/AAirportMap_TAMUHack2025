@@ -35,7 +35,7 @@ A React Native application that provides personalized airport navigation and rec
 
 5. Start the development server:
    ```
-   npm start
+   npx expo start -c --tunnel
    ```
 
 6. Run the app:
