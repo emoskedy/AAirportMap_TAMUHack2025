@@ -10,6 +10,8 @@ import {
   Linking
 } from 'react-native';
 
+import { WebView } from 'react-native-webview';
+
 // American Airlines Color Palette
 const AA_COLORS = {
   BLUE: '#002244',
@@ -42,6 +44,7 @@ const RECOMMENDATION_MAP: { [key: string]: string } = {
 
 const AirportNavigationRecommendation = ({ navigation, route }: any) => {
   const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [showWebView, setShowWebView] = useState(false); // State to toggle WebView
 
   const generateRecommendations = (userData: UserData): string[] => {
     const personalizationRules = [
@@ -61,7 +64,7 @@ const AirportNavigationRecommendation = ({ navigation, route }: any) => {
     const personalRecs = generateRecommendations(userData);
     
     // Convert to Google Maps-friendly queries
-    const mapQueries = personalRecs.map(rec => RECOMMENDATION_MAP[rec] || rec);
+    const mapQueries = personalRecs.map((rec) => RECOMMENDATION_MAP[rec] || rec);
     setRecommendations(mapQueries);
   }, []);
 
@@ -79,6 +82,16 @@ const AirportNavigationRecommendation = ({ navigation, route }: any) => {
       console.error("Couldn't open the URL", err);
     });
   };
+  if (showWebView) {
+    // Render WebView when the state is true
+    return (
+      <WebView
+        source={{ uri: 'https://www.aa.com/airportMaps/fullscreen?vid=iah' }}
+        style={{ flex: 1 }}
+        onError={() => setShowWebView(false)} // Handle WebView errors
+      />
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -95,7 +108,7 @@ const AirportNavigationRecommendation = ({ navigation, route }: any) => {
 
       <TouchableOpacity 
         style={styles.actionButton}
-        onPress={() => navigation.navigate('Map', { recommendations })}
+        onPress={() => setShowWebView(true)} // Show the WebView when button is pressed
       >
         <Text style={styles.actionButtonText}>Open Interactive Airport Map</Text>
       </TouchableOpacity>
