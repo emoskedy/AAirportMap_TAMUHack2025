@@ -91,6 +91,7 @@ AIRPORTMAP_TAMUHACK2025/
 ├── src/                         # Source code folder
 │   ├── screens/                 # Screens folder
 │   │   ├── Flightinfo.tsx       # Flight information screen
+│   │   ├── Flightstatus.tsx     # Flight status screen
 │   │   ├── Login.tsx            # Login screen
 │   │   ├── Map.tsx              # Map screen for navigation
 │   │   ├── ParallaxTransition.tsx # Parallax transition screen
