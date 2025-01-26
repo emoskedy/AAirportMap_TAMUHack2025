@@ -21,6 +21,8 @@ const Flightinfo = ({ navigation, route }: any) => {
     },
   };
 
+  const statusColor = user.flightInfo.status === 'Delayed' ? '#f44336' : '#4caf50'; // Red for delayed, green for on-time
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -28,7 +30,7 @@ const Flightinfo = ({ navigation, route }: any) => {
         <View style={styles.header}>
           <Text style={styles.headerText}>{user.flightInfo.origin} → {user.flightInfo.destination}</Text>
           <Text style={styles.dateText}>Sunday, January 26, 2025</Text>
-          <Text style={styles.statusText}>{user.flightInfo.status}</Text>
+          <Text style={[styles.statusText, { color: statusColor }]}>{user.flightInfo.status}</Text>
         </View>
 
         {/* Flight Summary */}
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: 16,
-    color: '#4caf50', // Green for "On Time"
     marginTop: 8,
     fontWeight: 'bold',
   },
