@@ -61,7 +61,7 @@ const Flightinfo = ({ navigation, route }: any) => {
         {/* Navigation Button */}
         <TouchableOpacity
           style={styles.recommendationButton}
-          onPress={() => navigation.navigate('Recommendation')}
+          onPress={() => navigation.navigate('Recommendation', { userData: user })} // Pass the user data
         >
           <Text style={styles.recommendationButtonText}>Go to Recommendation</Text>
         </TouchableOpacity>
