@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ViewStyle, TextStyle } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Flightinfo = ({ navigation, route }: any) => {
   const user = route?.params?.user || {
@@ -21,59 +22,118 @@ const Flightinfo = ({ navigation, route }: any) => {
     },
   };
 
-  const statusColor = user.flightInfo.status === 'Delayed' ? '#f44336' : '#4caf50'; // Red for delayed, green for on-time
+  const statusColor = user.flightInfo.status === 'Delayed' ? '#f44336' : '#4caf50';
+
+  const handleLogout = () => {
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.headerText}>{user.flightInfo.origin} → {user.flightInfo.destination}</Text>
-          <Text style={styles.dateText}>Sunday, January 26, 2025</Text>
-          <Text style={[styles.statusText, { color: statusColor }]}>{user.flightInfo.status}</Text>
-        </View>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.mainContainer}>
+          {/* Existing top half of the component */}
+          <View style={styles.header}>
+            <Text style={styles.headerText}>{user.flightInfo.origin} → {user.flightInfo.destination}</Text>
+            <Text style={styles.dateText}>Sunday, January 26, 2025</Text>
+            <Text style={[styles.statusText, { color: statusColor }]}>{user.flightInfo.status}</Text>
+          </View>
 
-        {/* Flight Summary */}
-        <View style={styles.summaryContainer}>
-          <Text style={styles.flightNumber}>Flight {user.flightInfo.flightID}</Text>
-          <View style={styles.summaryRow}>
-            <View>
-              <Text style={styles.label}>Depart</Text>
-              <Text style={styles.time}>{user.flightInfo.departureTime}</Text>
-              <Text style={styles.location}>{user.flightInfo.origin}</Text>
-              <Text style={styles.details}>Gate {user.flightInfo.gate}, Terminal {user.flightInfo.terminal}</Text>
+          <View style={styles.summaryContainer}>
+            <Text style={styles.flightNumber}>Flight {user.flightInfo.flightID}</Text>
+            <View style={styles.summaryRow}>
+              <View>
+                <Text style={styles.label}>Depart</Text>
+                <Text style={styles.time}>{user.flightInfo.departureTime}</Text>
+                <Text style={styles.location}>{user.flightInfo.origin}</Text>
+                <Text style={styles.details}>Gate {user.flightInfo.gate}, Terminal {user.flightInfo.terminal}</Text>
+              </View>
+              <View>
+                <Text style={styles.label}>Arrive</Text>
+                <Text style={styles.time}>{user.flightInfo.arrivalTime}</Text>
+                <Text style={styles.location}>{user.flightInfo.destination}</Text>
+                <Text style={styles.details}>Gate {user.flightInfo.arrivalGate}, Terminal {user.flightInfo.arrivalTerminal}</Text>
+              </View>
             </View>
-            <View>
-              <Text style={styles.label}>Arrive</Text>
-              <Text style={styles.time}>{user.flightInfo.arrivalTime}</Text>
-              <Text style={styles.location}>{user.flightInfo.destination}</Text>
-              <Text style={styles.details}>Gate {user.flightInfo.arrivalGate}, Terminal {user.flightInfo.arrivalTerminal}</Text>
+          </View>
+
+          <View style={styles.aircraftContainer}>
+            <Text style={styles.aircraftLabel}>Aircraft Type</Text>
+            <Text style={styles.aircraftText}>{user.flightInfo.aircraftType}</Text>
+          </View>
+
+          <TouchableOpacity
+            style={styles.recommendationButton}
+            onPress={() => navigation.navigate('Recommendation', { userData: user })}
+          >
+            <Text style={styles.recommendationButtonText}>Go to Recommendation</Text>
+          </TouchableOpacity>
+
+          {/* Bottom Buttons Section */}
+          <View style={styles.bottomButtonsContainer}>
+            <View style={styles.bottomButtonsRow}>
+              <TouchableOpacity 
+                style={[styles.circleButton, styles.logoutButton]} 
+                onPress={handleLogout}
+              >
+                <Icon name="logout" size={24} color="#fff" />
+              </TouchableOpacity>
+
+              <TouchableOpacity 
+                style={[styles.circleButton, styles.findTripButton]}
+                onPress={() => {/* Future implementation */}}
+              >
+                <Icon name="search" size={24} color="#fff" />
+              </TouchableOpacity>
+
+              <TouchableOpacity 
+                style={[styles.circleButton, styles.bookFlightButton]}
+                onPress={() => {/* Future implementation */}}
+              >
+                <Icon name="flight" size={24} color="#fff" />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
-
-        {/* Aircraft Details */}
-        <View style={styles.aircraftContainer}>
-          <Text style={styles.aircraftLabel}>Aircraft Type</Text>
-          <Text style={styles.aircraftText}>{user.flightInfo.aircraftType}</Text>
-        </View>
-
-        {/* Navigation Button */}
-        <TouchableOpacity
-          style={styles.recommendationButton}
-          onPress={() => navigation.navigate('Recommendation', { userData: user })} // Pass the user data
-        >
-          <Text style={styles.recommendationButtonText}>Go to Recommendation</Text>
-        </TouchableOpacity>
       </SafeAreaView>
     </SafeAreaProvider>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
+interface Styles {
+  safeArea: ViewStyle;
+  mainContainer: ViewStyle;
+  header: ViewStyle;
+  headerText: TextStyle;
+  dateText: TextStyle;
+  statusText: TextStyle;
+  summaryContainer: ViewStyle;
+  flightNumber: TextStyle;
+  summaryRow: ViewStyle;
+  label: TextStyle;
+  time: TextStyle;
+  location: TextStyle;
+  details: TextStyle;
+  aircraftContainer: ViewStyle;
+  aircraftLabel: TextStyle;
+  aircraftText: TextStyle;
+  recommendationButton: ViewStyle;
+  recommendationButtonText: TextStyle;
+  bottomButtonsContainer: ViewStyle;
+  bottomButtonsRow: ViewStyle;
+  circleButton: ViewStyle;
+  logoutButton: ViewStyle;
+  findTripButton: ViewStyle;
+  bookFlightButton: ViewStyle;
+}
+
+const styles = StyleSheet.create<Styles>({
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  mainContainer: {
+    flex: 1,
   },
   header: {
     backgroundColor: '#f4f4f4',
@@ -159,6 +219,40 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  bottomButtonsContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 20,
+    backgroundColor: '#f4f4f4',
+  },
+  bottomButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  circleButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  logoutButton: {
+    backgroundColor: '#aa0000',
+  },
+  findTripButton: {
+    backgroundColor: '#4A90E2',
+  },
+  bookFlightButton: {
+    backgroundColor: '#2ECC71',
   },
 });
 
