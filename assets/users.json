@@ -1,0 +1,43 @@
+[
+    {
+      "email": "student@example.com",
+      "password": "password123",
+      "citizenship": "United States",      
+      "flightInfo": {
+        "flightID": "AA123",
+        "origin": "Houston",
+        "destination": "London",
+        "departureTime": "8:10 AM",
+        "arrivalTime": "9:06 AM",
+        "gate": "B11",
+        "terminal": "B",
+        "arrivalGate": "B1",
+        "arrivalTerminal": "A2",
+        "baggageClaim": "5",
+        "aircraftType": "Airbus A321",
+        "status": "On Time",
+        "flightClass": "Economy"
+      }
+    },
+    {
+      "email": "richlady@example.com",
+      "password": "luxurypass",
+      "citizenship": "United States",
+      "flightInfo": {
+        "flightID": "UA456",
+        "origin": "Houston",
+        "destination": "New York",
+        "departureTime": "10:30 AM",
+        "arrivalTime": "2:00 PM",
+        "gate": "C7",
+        "terminal": "C",
+        "arrivalGate": "D4",
+        "arrivalTerminal": "D",
+        "baggageClaim": "3",
+        "aircraftType": "Boeing 737",
+        "status": "Delayed",
+        "flightClass": "First Class"
+      }
+    }
+  ]
+  
