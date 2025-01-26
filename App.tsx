@@ -16,7 +16,17 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ParallaxTransition">
+      <Stack.Navigator initialRouteName="ParallaxTransition"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#0078D2', // Set the header color to blue
+          },
+          headerTintColor: '#fff', // Set the header text color to white
+          headerTitleStyle: {
+            fontWeight: 'bold', // Optional: Customize the font weight
+          },
+        }}
+      >
         {/* ParallaxTransition is the initial screen */}
         <Stack.Screen
           name="ParallaxTransition"
@@ -33,7 +43,10 @@ export default function App() {
         <Stack.Screen
           name="Flightinfo"
           component={Flightinfo}
-          options={{ title: 'Flight Information' }}
+          options={{ 
+            title: 'Flight Information', 
+            headerLeft: () => null,
+          }}
         />
         {/* Add Recommendation screen */}
         <Stack.Screen
