@@ -17,7 +17,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Flightinfo" component={Flightinfo} />
+        <Stack.Screen
+          name="Flightinfo"
+          component={Flightinfo}
+          options={{ title: 'Flight Information' }}
+        />
         <Stack.Screen name="Recommendation" component={Recommendation} />
         <Stack.Screen name="Map" component={Map} />
       </Stack.Navigator>

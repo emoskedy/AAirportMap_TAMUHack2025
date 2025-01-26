@@ -46,10 +46,6 @@ const Login = ({ navigation }: any) => {
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
-        <Button
-          title="Go to Information"
-          onPress={() => navigation.navigate('Flightinfo')}
-        />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -66,7 +62,7 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#aa0000',
+    backgroundColor: '#white',
   },
   logo: {
     width: 500,
