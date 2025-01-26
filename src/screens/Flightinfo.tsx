@@ -101,9 +101,7 @@ const Flightinfo = ({ navigation, route }: any) => {
 
             <TouchableOpacity
               style={[styles.circleButton, styles.findTripButton]}
-              onPress={() => {
-                /* Future implementation */
-              }}
+              onPress={() => navigation.navigate('Flightstatus')}
             >
               <Icon name="search" size={24} color="#fff" />
             </TouchableOpacity>

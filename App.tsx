@@ -9,6 +9,7 @@ import Flightinfo from './src/screens/Flightinfo';
 import Recommendation from './src/screens/Recommendation';
 import Map from './src/screens/Map';
 import ParallaxTransition from './src/screens/ParallaxTransition';
+import Flightstatus from './src/screens/Flightstatus';
 
 // Create stack navigator
 const Stack = createStackNavigator();
@@ -59,6 +60,12 @@ export default function App() {
           name="Map"
           component={Map}
           options={{ title: 'Map' }}
+        />
+        {/* Add Flight Status screen*/}
+        <Stack.Screen
+          name="Flightstatus"
+          component={Flightstatus}
+          options={{ title: 'Flight Status' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
