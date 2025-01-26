@@ -73,20 +73,42 @@ A React Native application that provides personalized airport navigation and rec
 ## File Structure
 
 ```
-project-root/
-├── assets/
-│   ├── users.json               # Mock user data
+AIRPORTMAP_TAMUHACK2025/
+├── .expo/                       # Expo configuration files
+│   ├── web/
+│   ├── devices.json
+│   ├── settings.json
+├── assets/                      # Assets folder for images and data
 │   ├── AA_logo.png              # American Airlines logo
-├── components/
-│   ├── Login.tsx                # Login screen
-│   ├── FlightInfo.tsx           # Flight information screen
-│   ├── Recommendations.tsx      # Recommendations screen
-├── services/
-│   ├── openaiService.ts         # API integration with OpenAI
-├── .env                         # OpenAI API key
+│   ├── adaptive-icon.png        # Adaptive app icon
+│   ├── aircraft_pic.png         # Aircraft picture for FlightInfo
+│   ├── frame3.png               # Parallax transition frame
+│   ├── favicon.png              # App favicon
+│   ├── icon.png                 # App icon
+│   ├── splash-icon.png          # Splash screen icon
+│   ├── users.json               # Mock user data
+├── node_modules/                # Node.js dependencies
+├── src/                         # Source code folder
+│   ├── screens/                 # Screens folder
+│   │   ├── Flightinfo.tsx       # Flight information screen
+│   │   ├── Login.tsx            # Login screen
+│   │   ├── Map.tsx              # Map screen for navigation
+│   │   ├── ParallaxTransition.tsx # Parallax transition screen
+│   │   ├── Recommendation.tsx   # Recommendations screen
+│   ├── services/                # Services folder
+│   │   ├── openaiService.ts     # API integration with OpenAI
+├── .env                         # Environment file for sensitive data (e.g., API keys)
+├── .gitignore                   # Files and directories to ignore in git
 ├── App.tsx                      # Main entry point
+├── app.json                     # Expo app configuration
+├── babel.config.js              # Babel configuration
+├── env.d.ts                     # Environment types
+├── index.ts                     # Entry point for React Native
+├── package.json                 # Project dependencies and scripts
+├── package-lock.json            # Dependency lockfile
 ├── README.md                    # Project documentation
-├── package.json                 # Project dependencies
+├── tsconfig.json                # TypeScript configuration
+├── vector-icons.d.ts            # TypeScript definitions for vector icons
 ```
 ---
 
